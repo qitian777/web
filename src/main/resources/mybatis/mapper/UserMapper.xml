@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tian.web.mapper.UserMapper">
+    <insert id="saveUser" parameterType="user">
+        insert into user (id,nickname,username,password,create_time)
+         values (${id},#{nickname},#{username},#{password},#{createTime})
+    </insert>
+
+    <update id="updateUserInfo" parameterType="map">
+        update user set
+        <foreach collection="param" item="value" index="key" separator=",">
+            ${key} = #{value}
+        </foreach>
+        where username=#{username}
+    </update>
+
+    <select id="getUserByUsername" parameterType="string" resultType="user">
+        select * from user where username = #{name}
+    </select>
+
+    <select id="getTopId" resultType="int">
+        select id from user order by id desc limit 1
+    </select>
+
+    <select id="checkUserByUsername" parameterType="string" resultType="int">
+        select count(1) from user where username = #{name}
+    </select>
+
+    <update id="createCollections" parameterType="string">
+        create table ${table}(
+     	id int primary key,
+    	foreign key(id) references myweb.items(id))
+    </update>
+</mapper>

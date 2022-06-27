@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>幻影在线</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/iconfont.js"></script>
+</head>
+<body>
+<header th:replace="~{commoms::header}"></header>
+<div class="container pb-3">
+    <div class="row">
+        <div class="col-12">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleControls" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleControls" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleControls" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active"><a href="/detail?id=4355" target="_blank"><img
+                            class="d-block w-100"
+                            src="/images/rzdf.jpeg"
+                            alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>让子弹飞</h5>
+                            <p>这部经典，你看懂了多少？</p>
+                        </div>
+                    </a>
+                    </div>
+                    <div class="carousel-item"><a href="/detail?id=8064" target="_blank"><img class="d-block w-100"
+                                                                                              src="/images/sgyy.jpeg"
+                                                                                              alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>三国演义</h5>
+                            <p>央视版三国，经典值得重温！</p>
+                        </div>
+                    </a>
+                    </div>
+                    <div class="carousel-item"><a href="/detail?id=931" target="_blank"><img class="d-block w-100"
+                                                                                             src="/images/jz.jpeg"
+                                                                                             alt="Third slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>紫罗兰永恒花园</h5>
+                            <p>京阿尼诚意之作！</p>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span
+                        class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+                        class="sr-only">Previous</span> </a> <a class="carousel-control-next"
+                                                                href="#carouselExampleControls" role="button"
+                                                                data-slide="next"> <span
+                    class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div class="clearfix">
+            <h4 class="float-left">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-icon-test"></use>
+                </svg>
+                电影
+            </h4>
+            <a href="/list?type=电影" class="float-right mt-1">更多
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-gengduo"></use>
+                </svg>
+            </a></div>
+        <div class="row">
+            <div class="col-md-7 col-lg-8 col-12">
+                <div class="row">
+                    <div class="col-6 col-lg-4 pt-3" th:each="movie:${movies}">
+                        <div class="card">
+                            <a th:href="${'/detail?id='+movie.id}" target="_blank">
+                                <div class="img_scale">
+                                    <img class="card-img-top" th:src="${movie.poster}"
+                                         alt="Card image cap">
+                                    <span th:class="${movie.bi_score==0}?'d-none'"
+                                          th:text="${'B站:'+movie.bi_score}"></span>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title my-1" th:text="${movie.name}"></h5>
+                                    </div>
+                                    <div class="text-truncate mt-0" th:title="${movie.introduction}"
+                                         th:text="${movie.introduction}">暂无介绍
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4 col-12">
+                <div class="row mx-0 pt-3">
+                    <div class="col-12 card">
+                        <div class="clearfix">
+                            <h4 class="float-left">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-shujupaihangbang"></use>
+                                </svg>
+                                电影排行榜
+                            </h4>
+                            <a href="/list?type=电影&order=评分" class="float-right mt-1">更多
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-gengduo"></use>
+                                </svg>
+                            </a></div>
+                        <ul class="list-unstyled clearfix">
+                            <li class="mt-2" th:each="topMovie,stat:${topMovies}">
+                                <span th:class="${stat.count<4}?'border number num-top':'border number'"
+                                      th:text="${stat.count}"></span>
+                                <a target="_blank" th:href="${'/detail?id='+topMovie.id}"
+                                   th:text="${topMovie.name}"></a>
+                                <span class="text-color float-right" th:text="${topMovie.bi_score}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 px-0">
+                        <ul class="list-unstyled clearfix movie-ul">
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">剧情</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">喜剧</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">爱情</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">动作</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">科幻</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">犯罪</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">恐怖</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">悬疑</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">奇幻</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">战争</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">传记</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">家庭</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">歌舞</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">历史</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">冒险</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">纪实</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">灾难</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">动画</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">漫画改</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">小说改</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div class="clearfix">
+            <h4 class="float-left">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-dianshiju"></use>
+                </svg>
+                电视剧
+            </h4>
+            <a href="/list?type=电视剧" class="float-right mt-1">更多
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-gengduo"></use>
+                </svg>
+            </a></div>
+        <div class="row">
+            <div class="col-md-7 col-lg-8 col-12">
+                <div class="row">
+                    <div class="col-6 col-lg-4 pt-3" th:each="drama:${dramas}">
+                        <div class="card">
+                            <a th:href="${'/detail?id='+drama.id}" target="_blank">
+                                <div class="img_scale"><img class="card-img-top" th:src="${drama.poster}"
+                                                            alt="Card image cap">
+                                    <span th:class="${drama.bi_score==0}?'d-none'" th:text="${drama.bi_score}"></span>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title my-1" th:text="${drama.name}"></h5>
+                                    </div>
+                                    <div class="text-truncate mt-0" th:title="${drama.introduction}"
+                                         th:text="${drama.introduction}">暂无介绍
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4 col-12">
+                <div class="row mx-0 pt-3">
+                    <div class="col-12 card mx-auto">
+                        <div class="clearfix">
+                            <h4 class="float-left">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-shujupaihangbang"></use>
+                                </svg>
+                                电视剧排行榜
+                            </h4>
+                            <a href="/list?type=电视剧&order=评分" class="float-right mt-1">更多
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-gengduo"></use>
+                                </svg>
+                            </a></div>
+                        <ul class="list-unstyled clearfix">
+                            <li class="mt-2" th:each="topDrama,stat:${topDramas}">
+                                <span th:class="${stat.count<4}?'border number num-top':'border number'"
+                                      th:text="${stat.count}"></span>
+                                <a target="_blank" th:href="${'/detail?id='+topDrama.id}"
+                                   th:text="${topDrama.name}"></a>
+                                <span class="text-color float-right" th:text="${topDrama.bi_score}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 px-0">
+                        <ul class="list-unstyled clearfix drama-ul">
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">搞笑</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">奇幻</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">战争</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">武侠</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">都市</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">古装</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">青春</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">谍战</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">经典</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">情感</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">悬疑</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">励志</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">神话</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">穿越</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">年代</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">农村</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">刑侦</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">剧情</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">家庭</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">历史</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">军旅</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <div class="clearfix">
+            <h4 class="float-left">
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-dongman"></use>
+                </svg>
+                动漫
+            </h4>
+            <a href="/list?type=动漫" class="float-right mt-1">更多
+                <svg class="icon" aria-hidden="true">
+                    <use xlink:href="#icon-gengduo"></use>
+                </svg>
+            </a></div>
+        <div class="row">
+            <div class="col-md-7 col-lg-8 col-12">
+                <div class="row">
+                    <div class="col-6 col-lg-4 pt-3" th:each="animation:${animations}">
+                        <div class="card">
+                            <a th:href="${'/detail?id='+animation.id}" target="_blank">
+                                <div class="img_scale"><img class="card-img-top" th:src="${animation.poster}"
+                                                            alt="Card image cap">
+                                    <span th:class="${animation.bi_score==0}?'d-none'"
+                                          th:text="${animation.bi_score}"></span>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <h5 class="card-title my-1" th:text="${animation.name}"></h5>
+                                    </div>
+                                    <div class="text-truncate mt-0" th:title="${animation.introduction}"
+                                         th:text="${animation.introduction}">暂无介绍
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-lg-4 col-12">
+                <div class="row mx-0 pt-3">
+                    <div class="col-12 card mx-auto">
+                        <div class="clearfix">
+                            <h4 class="float-left">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-shujupaihangbang"></use>
+                                </svg>
+                                动漫排行榜
+                            </h4>
+                            <a href="/list?type=动漫&order=评分" class="float-right mt-1">更多
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-gengduo"></use>
+                                </svg>
+                            </a></div>
+                        <ul class="list-unstyled clearfix">
+                            <li class="mt-2" th:each="topAnimation,stat:${topAnimations}">
+                                <span th:class="${stat.count<4}?'border number num-top':'border number'"
+                                      th:text="${stat.count}"></span>
+                                <a target="_blank" th:href="${'/detail?id='+topAnimation.id}"
+                                   th:text="${topAnimation.name}"></a>
+                                <span class="text-color float-right" th:text="${topAnimation.bi_score}"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 sort_a px-0">
+                        <ul class="list-unstyled clearfix animation-ul">
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">原创</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">漫画改</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">小说改</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">游戏改</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">特摄</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">布袋戏</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">热血</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">穿越</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">战斗</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">搞笑</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">日常</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">科幻</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">萌系</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">治愈</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">校园</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">恋爱</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">少女</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">冒险</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">历史</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">机战</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">运动</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">推理</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">美食</a>
+                            </li>
+                            <li class="col-4 float-left p-2"><a href="" class="btn btn-outline-success w-100">偶像</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>
+<hr class="m-0">
+<footer th:replace="~{commoms::footer}"></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/myjs.js"></script>
+</body>
+</html>

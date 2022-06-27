@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人信息</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/iconfont.js"></script>
+</head>
+<body>
+<header th:replace="~{commoms::header}"></header>
+<div class="container py-3">
+    <div class="form_popup" id="login_form">
+        <div class="container pb-3">
+            <div class="form_popup">
+                <div class="text-center">
+                    <div class="mt-5">
+                        <h2>用户信息</h2>
+                        <span>按要求输入并提交可修改信息！</span>
+                        <span class="text-danger" th:text="${error==null}?'':${error}"></span>
+                    </div>
+                </div>
+                <div class="user-account">
+                    <form method="post" action="/user/updateInfo" onsubmit="return checkUpdateInfo()">
+                        <div class="input-sec">
+                            <input type="text" name="nickname" th:placeholder="${#authentication.principal.nickname}">
+                            <label class="invisible" id="name-error">请不要使用过长或过短的用户名！</label>
+                        </div>
+                        <div class="input-sec">
+                            <input type="email"  name="username" disabled th:value="${#authentication.name}">
+                            <label class="text-danger invisible" id="mail-error">邮箱已被注册！</label>
+                        </div>
+                        <div class="input-sec">
+                            <input type="Password" name="password" placeholder="新密码">
+                            <label>密码以字母开头，由字母（区分大小写）、数字、下划线构成，字符数大于六小于十六</label>
+                        </div>
+                        <div class="input-sec">
+                            <input type="password" name="confirm-password" placeholder="重复新密码">
+                            <label class="text-danger invisible" id="password-error">密码不能为空！</label>
+                        </div>
+                        <div class="input-sec mb-0">
+                            <button type="submit">修改</button>
+                        </div>
+                    </form>
+                    <div class="fr-ps">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="m-0">
+<footer th:replace="~{commoms::footer}"></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/myjs.js"></script>
+</body>
+</html>

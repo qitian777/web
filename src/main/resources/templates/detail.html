@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title th:text="${detailItem.name}"></title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/iconfont.js"></script>
+</head>
+<body>
+<header th:replace="~{commoms::header}"></header>
+<div class="container ">
+    <div class="row">
+        <div class="col-lg-8 p-0">
+            <div class="bg-ra">
+                <h3>
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-mingcheng"></use>
+                    </svg>
+                    &nbsp;<span th:text="${detailItem.name}"></span></h3>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3 col-md-4 p-0 d-img"><img class="w-100" th:src="${detailItem.poster}" alt="">
+                            <a onclick="storeUp()" class="store">
+                                <svg class="icon" aria-hidden="true">
+                                    <use xlink:href="#icon-shoucang2"></use>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="col-9 col-md-8">
+                            <ul class="list-unstyled">
+                                <li th:class="${detailItem.area==''}?'d-none'"><b>地区：</b><span
+                                        th:text="${detailItem.area}"></span></li>
+                                <li th:class="${detailItem.show_time==''}?'d-none'"><b>上映时间：</b><span
+                                        th:text="${detailItem.show_time}"></span></li>
+                                <li th:class="${detailItem.number==0}?'d-none'"><b>集数：</b><span
+                                        th:text="${detailItem.number}"></span></li>
+                                <li th:class="${detailItem.bi_score==0}?'d-none'"><b>B站评分：</b><span
+                                        th:text="${detailItem.bi_score}"></span></li>
+                                <li><b>风格：</b><span th:text="${detailItem.style}"></span></li>
+                                <li th:class="${detailItem.origin_name==''}?'d-none'"><b>原名：</b><span
+                                        th:text="${detailItem.origin_name}"></span></li>
+                                <li th:class="${detailItem.alias==''}?'d-none'"><b>别名：</b><span
+                                        th:text="${detailItem.alias}"></span></li>
+                                <li class="d-none"><input id="hi-id" type="hidden" th:value="${detailItem.id}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-ra mb-0">
+                <span th:class="${detailItem.introduction==null}?'d-none'">
+                    <span class="mc-title">
+                        <svg class="icon" aria-hidden="true">
+                          <use xlink:href="#icon-jianjie2"></use>
+                        </svg> 剧情简介：
+                    </span>
+                    <span th:text="${detailItem.introduction}"></span>
+                </span>
+                <ul class="nav nav-tabs mt-3">
+                    <li class="nav-item"><a href="#tab1" class="nav-link active" data-toggle="tab">B站</a></li>
+                    <li class="nav-item"><a href="#tab2" class="nav-link" data-toggle="tab">优酷</a></li>
+                    <li class="nav-item"><a href="#tab3" class="nav-link" data-toggle="tab">腾讯</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active pt-3" id="tab1">
+                        <a th:href="${detailItem.bi_url}" class="btn btn-outline-success">播放</a>
+                    </div>
+                    <div class="tab-pane fade  pt-3" id="tab2">
+                        <button type="button" class="btn btn-outline-success">暂无</button>
+                    </div>
+                    <div class="tab-pane fade  pt-3" id="tab3">
+                        <button type="button" class="btn btn-outline-success">暂无</button>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <div class="w-50 float-left">
+                    <div class="bg-ra">
+                        <div class="mc-title">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-mingxing"></use>
+                            </svg>
+                            主演：
+                        </div>
+                        <span th:text="${detailItem.star==''}?'暂无信息':${detailItem.star}"></span>
+                    </div>
+                </div>
+                <div class="w-50 float-left">
+                    <div class="bg-ra ml-0">
+                        <div class="mc-title">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-STAFF_FILE_L"></use>
+                            </svg>
+                            STAFF:
+                        </div>
+                        <span th:text="${detailItem.staff==''}?'暂无信息':${detailItem.staff}"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 p-0">
+            <div class="bg-ra mb-0">
+                <div class="mc-title ml-2">
+                    <svg class="icon" aria-hidden="true">
+                        <use xlink:href="#icon-weinituijian"></use>
+                    </svg>
+                    可能喜欢:
+                </div>
+                <div class="row">
+                    <div class="col-6 col-md-4 col-lg-6 pb-3" th:each="similarItem:${similarItems}">
+                        <div class="card">
+                            <a th:href="${'/detail?id='+similarItem.id}">
+                                <div class="img_scale">
+                                    <img class="card-img-top" th:src="${similarItem.poster}"
+                                         alt="Card image cap">
+                                    <span th:class="${similarItem.bi_score==0}?'d-none'"
+                                          th:text="${similarItem.bi_score}"></span>
+                                </div>
+                                <div class="card-body p-2">
+                                    <h5 class="card-title m-0"><b th:text="${similarItem.name}"></b></h5>
+                                    <div class="text-truncate" th:title="${similarItem.introduction}"
+                                         th:text="${similarItem.introduction}">
+                                        暂无介绍
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="m-0">
+<footer th:replace="~{commoms::footer}"></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/myjs.js"></script>
+
+</body>
+</html>

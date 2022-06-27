@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tian.web.mapper.ItemsMapper">
+    <select id="checkStore" parameterType="map" resultType="int">
+        select count(1) from ${table} where id=${id}
+    </select>
+
+    <insert id="addCollection" parameterType="map">
+        insert into ${table} values ( ${id} )
+    </insert>
+
+    <delete id="deleteCollection" parameterType="map">
+        delete from  ${table} where id=${id}
+    </delete>
+
+    <select id="searchItems" parameterType="map" resultType="items">
+        select * from items where name like "%"#{string}"%"
+        or origin_name like "%"#{string}"%" or alias like "%"#{string}"%"
+        limit ${start},12
+    </select>
+
+    <select id="searchItemsCount" parameterType="map" resultType="int">
+        select count(1) from items where name like "%"#{string}"%"
+        or origin_name like "%"#{string}"%" or alias like "%"#{string}"%"
+    </select>
+
+    <select id="getNewItems" parameterType="String" resultType="items">
+        select * from items where type like "%"#{type}"%" order by show_time desc limit 6
+    </select>
+
+    <select id="getTopItems" parameterType="String" resultType="items">
+        select * from items where type like "%"#{type}"%" order by bi_score desc limit 10
+    </select>
+
+    <select id="getDetailItem" parameterType="int" resultType="items">
+        select * from items where id= #{id}
+    </select>
+
+    <select id="getSortItems" parameterType="map" resultType="items">
+        select * from items where type like concat('%',#{type},'%')
+        <if test="area!=null">
+            and area like concat('%',#{area},'%')
+        </if>
+        <if test="style!=null">
+            and style like concat('%',#{style},'%')
+        </if>
+        <choose>
+            <when test="year==2009">
+                and year(show_time) &lt; 2010
+            </when>
+            <when test="year!=null and year!=2009">
+                    and year(show_time)= #{year}
+            </when>
+        </choose>
+        order by ${order} desc limit ${start},12
+    </select>
+
+    <select id="getItemsCount" parameterType="map" resultType="int">
+        select count(1) from items where type like concat('%',#{type},'%')
+        <if test="area!=null">
+            and area like concat('%',#{area},'%')
+        </if>
+        <if test="style!=null">
+            and style like concat('%',#{style},'%')
+        </if>
+        <choose>
+            <when test="year==2009">
+                and year(show_time) &lt; 2010
+            </when>
+            <when test="year!=null and year!=2009">
+                and year(show_time)= #{year}
+            </when>
+        </choose>
+    </select>
+
+    <select id="getSimilarItems" parameterType="map" resultType="items">
+        select * from items where type REGEXP #{type}
+        <if test="area!=null">
+            and area REGEXP #{area}
+        </if>
+        <if test="styles!=null">
+            and style like
+            <foreach collection="styles" item="sty" separator="and style like">
+                "%"#{sty}"%"
+            </foreach>
+        </if>
+        and id not in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            ${id}
+        </foreach>
+        limit ${size}
+    </select>
+
+    <select id="getCollItemsCount" parameterType="map" resultType="int">
+        select count(1) from ${table}
+    </select>
+
+    <select id="getCollItems" parameterType="map" resultType="items">
+        select b.* from ${table} a, myweb.items b
+        where a.id=b.id and type like concat('%',#{type},'%')
+        order by ${order} desc
+        limit ${start},12
+    </select>
+</mapper>

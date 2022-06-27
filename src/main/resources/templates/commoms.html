@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>公共页面</title>
+</head>
+<body>
+<header th:fragment="header">
+    <div class="top_bar py-2">
+        <div class="container-fluid px-md-5">
+            <div class="clearfix">
+                <div class="float-left col-4 col-sm-3 p-0">
+                    <h3>幻影在线</h3>
+                </div>
+                <div class="search_form float-left col-6 p-0">
+                    <form action="/search" target="_blank">
+                        <input type="text" name="string" th:placeholder="${search==null}?'search':${search}">
+                        <button type="submit">搜索</button>
+                    </form>
+                </div>
+                <div class="user_log float-right p-0" sec:authorize="!isAuthenticated()"><a href="/logon">
+                    <img src="images/login.png" alt="" >
+                </a></div>
+                <div class="user_log float-right p-0 mr-2 dropdown"  sec:authorize="isAuthenticated()"> <a class="btn p-0" data-toggle="dropdown" data-offset="-28,0"><img src="/images/tx.jpeg" alt="" ></a>
+                    <div class="dropdown-menu" style="min-width: 60px">
+                        <a class="dropdown-item" disabled="">
+                            <span th:text="${#authentication.principal.nickname}"></span>
+                        </a>
+                        <a class="dropdown-item" target="_blank" href="/user/info">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-yonghuxinxi"></use>
+                            </svg> 信息
+                        </a>
+                        <a class="dropdown-item" target="_blank" href="/user/coll">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-shoucang"></use>
+                            </svg> 收藏
+                        </a>
+                        <a class="dropdown-item" href="/logout">
+                            <svg class="icon" aria-hidden="true">
+                                <use xlink:href="#icon-tuichudenglu"></use>
+                            </svg> 退出
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item"><a href="/" th:class="${type=='' and coll==null}?'nav-link text-primary pl-0':'nav-link pl-0'"><b>首页</b></a>
+                </li>
+                <li class="nav-item"><a href="/list?type=电影"
+                                        th:class="${type=='电影' and coll==null}?'nav-link text-primary':'nav-link'"><b>电影</b></a></li>
+                <li class="nav-item"><a href="/list?type=电视剧"
+                                        th:class="${type=='电视剧' and coll==null}?'nav-link text-primary':'nav-link'"><b>电视剧</b></a></li>
+                <li class="nav-item"><a href="/list?type=动漫"
+                                        th:class="${type=='动漫' and coll==null}?'nav-link text-primary':'nav-link'"><b>动漫</b></a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="row" th:fragment="list-items" style="min-height: 500px">
+    <div class="col-6 col-md-4 col-lg-3 pt-3" th:each="sortItem:${sortItems}">
+        <div class="card">
+            <a th:href="${'/detail?id='+sortItem.id}" target="_blank">
+                <div class="img_scale"><img class="card-img-top" th:src="${sortItem.poster}" alt="Card image cap">
+                    <span th:class="${sortItem.bi_score==0}?'d-none'" th:text="${sortItem.bi_score}"></span></div>
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title mt-1" th:text="${sortItem.name}"></h5></div>
+                    <div class="text-truncate" th:title="${sortItem.introduction}"
+                         th:text="${sortItem.introduction}"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="index-page">
+    <ul class="pagination justify-content-center">
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">上一页</span>
+            </a>
+        </li>
+        <li th:class="${totalPage>0}?'page-item':'d-none'"><a class="page-link" href="#">1</a></li>
+        <li th:class="${go_page>3}?'page-item':'d-none'"><strong class="m-2">...</strong></li>
+        <li th:class="${totalPage>2}?'page-item':'d-none'"><a class="page-link" href="#"
+                                                              th:text="${go_page>3}?${go_page}-1:2"></a></li>
+        <li th:class="${totalPage>3 && go_page<totalPage}?'page-item':'d-none'"><a class="page-link" href="#"
+                                                                                   th:text="${go_page>3}?${go_page}:3"></a>
+        </li>
+        <li th:class="${totalPage>4 && go_page+1<totalPage}?'page-item':'d-none'"><a class="page-link" href="#"
+                                                                                     th:text="${go_page>3 && go_page+1<totalPage}?${go_page+1}:4"></a>
+        </li>
+        <li th:class="${go_page+2<totalPage}?'page-item':'d-none'"><strong class="m-2">...</strong></li>
+        <li th:class="${totalPage>1}?'page-item':'d-none'"><a class="page-link" href="#" th:text="${totalPage}"></a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">下一页</span>
+            </a>
+        </li>
+    </ul>
+    <input type="hidden" th:value="${type}" id="hi-type"/>
+    <input type="hidden" th:value="${area}" id="hi-area"/>
+    <input type="hidden" th:value="${style}" id="hi-style"/>
+    <input type="hidden" th:value="${year}" id="hi-year"/>
+    <input type="hidden" th:value="${order}" id="hi-order"/>
+    <input type="hidden" th:value="${go_page}" id="hi-go_page"/>
+    <input type="hidden" th:value="${totalPage}" id="hi-page"/>
+    <input type="hidden" th:value="${logged}" id="hi-user"/>
+    <input type="hidden" th:value="${search}" id="hi-search"/>
+</div>
+
+<footer th:fragment="footer">
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col-md-8 col-12">
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <h3>关于本站</h3>
+                        <hr>
+                        <p>本站为站长学习java练习所做，所有内容均来自网络，若有侵权请联系站长删除！</p>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <h3>开发日志</h3>
+                        <hr>
+                        <div>
+                            <div class="media">
+                                <div class="media-body"><a href="/devLog" class="text-primary">查看开发日志</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12 mt-md-0 mt-2">
+                <h3>联系站长</h3>
+                <hr>
+                <address>
+                    <strong>千羽凌枫</strong><br>
+                    <a href="mailto:#">1097598544@qq.com</a>
+                </address>
+            </div>
+        </div>
+    </div>
+    <div class="text-center container">
+        <div class="row">
+            <div class="col-12">
+                <p>Copyright © huanyingol.cn 版权所有</p>
+                <a href="https://beian.miit.gov.cn/" target="_blank">豫ICP备2022002493号-1</a>
+                <div style="width:300px;margin:0 auto; padding:20px 0;">
+                    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41152602000212" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img src="/images/备案图标.png" style="float:left;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">豫公网安备 41152602000212号</p></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/myjs.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+@charset "utf-8";
+.xx4{
+    background: url("/images/error.jpeg") no-repeat center top;
+}
+.xx5{
+    background: url("/images/e500.jpeg") no-repeat center top;
+}
+div{
+    max-width: 1000px;
+    margin: 50px auto;
+}
+img{
+    width: 100%;
+}
+span{
+    color: #ce30d5;
+}
+.def{
+    width: 350px;
+}

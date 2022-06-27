@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title th:text="${status}"></title>
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/error.css" rel="stylesheet">
+</head>
+<body class="xx4">
+<div th:switch="${status}">
+    <img th:case="'400'" src="/images/svg/e400.svg" alt="">
+    <img th:case="'401'" src="/images/svg/e401.svg" alt="">
+    <img th:case="'403'" src="/images/svg/e403.svg" alt="">
+    <img th:case="'404'" src="/images/svg/e404.svg" alt="">
+    <img th:case="'405'" src="/images/svg/e405.svg" alt="">
+    <img th:case="'407'" src="/images/svg/e407.svg" alt="">
+    <img th:case="'414'" src="/images/svg/e414.svg" alt="">
+    <div class="def">
+        <span th:case="*">
+            <h1 th:text="${status}"></h1>
+            <h3 th:text="${error}"></h3>
+        </span>
+    </div>
+    <div class="clearfix mt-0">
+        <a href="/" class="btn btn-primary ml-5">回到主页</a>
+        <button type="button" class="btn btn-primary  float-right mr-5" onClick="history.back();">返回上一页</button>
+    </div>
+</div>
+</body>
+</html>

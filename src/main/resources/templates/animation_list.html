@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>幻影在线-动漫</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/iconfont.js"></script>
+</head>
+<body>
+<header th:replace="~{commoms::header}"></header>
+<div class="container py-3">
+    <div class="row">
+        <div class="col-12">
+            <table class="sort_area">
+                <tr>
+                    <th class="align-top">按地区：</th>
+                    <td><ul class="list-unstyled areas">
+                        <li class="float-left"><a href="">全部</a></li>
+                        <li class="float-left"><a href="">中国</a></li>
+                        <li class="float-left"><a href="">美国</a></li>
+                        <li class="float-left"><a href="">日本</a></li>
+                    </ul></td>
+                </tr>
+                <tr>
+                    <th class="align-top">按时间：</th>
+                    <td><ul class="list-unstyled years">
+                        <li class="float-left"><a href="">全部</a></li>
+                        <li class="float-left"><a href="">2021</a></li>
+                        <li class="float-left"><a href="">2020</a></li>
+                        <li class="float-left"><a href="">2019</a></li>
+                        <li class="float-left"><a href="">2018</a></li>
+                        <li class="float-left"><a href="">2017</a></li>
+                        <li class="float-left"><a href="">2016</a></li>
+                        <li class="float-left"><a href="">2015</a></li>
+                        <li class="float-left"><a href="">2014</a></li>
+                        <li class="float-left"><a href="">2013</a></li>
+                        <li class="float-left"><a href="">2012</a></li>
+                        <li class="float-left"><a href="">2011</a></li>
+                        <li class="float-left"><a href="">2010</a></li>
+                        <li class="float-left"><a href="">更早</a></li>
+                    </ul></td>
+                </tr>
+                <tr>
+                    <th class="align-top">按风格：</th>
+                    <td><ul class="list-unstyled styles">
+                        <li class="float-left"><a href="">全部</a></li>
+                        <li class="float-left"><a href="">原创</a></li>
+                        <li class="float-left"><a href="">漫画改</a></li>
+                        <li class="float-left"><a href="">小说改</a></li>
+                        <li class="float-left"><a href="">游戏改</a></li>
+                        <li class="float-left"><a href="">特摄</a></li>
+                        <li class="float-left"><a href="">布袋戏</a></li>
+                        <li class="float-left"><a href="">热血</a></li>
+                        <li class="float-left"><a href="">穿越</a></li>
+                        <li class="float-left"><a href="">奇幻</a></li>
+                        <li class="float-left"><a href="">战斗</a></li>
+                        <li class="float-left"><a href="">搞笑</a></li>
+                        <li class="float-left"><a href="">日常</a></li>
+                        <li class="float-left"><a href="">科幻</a></li>
+                        <li class="float-left"><a href="">萌系</a></li>
+                        <li class="float-left"><a href="">治愈</a></li>
+                        <li class="float-left"><a href="">校园</a></li>
+                        <li class="float-left"><a href="">少儿</a></li>
+                        <li class="float-left"><a href="">泡面</a></li>
+                        <li class="float-left"><a href="">恋爱</a></li>
+                        <li class="float-left"><a href="">少女</a></li>
+                        <li class="float-left"><a href="">魔法</a></li>
+                        <li class="float-left"><a href="">冒险</a></li>
+                        <li class="float-left"><a href="">历史</a></li>
+                        <li class="float-left"><a href="">架空</a></li>
+                        <li class="float-left"><a href="">机战</a></li>
+                        <li class="float-left"><a href="">神魔</a></li>
+                        <li class="float-left"><a href="">声控</a></li>
+                        <li class="float-left"><a href="">运动</a></li>
+                        <li class="float-left"><a href="">励志</a></li>
+                        <li class="float-left"><a href="">音乐</a></li>
+                        <li class="float-left"><a href="">推理</a></li>
+                        <li class="float-left"><a href="">社团</a></li>
+                        <li class="float-left"><a href="">智斗</a></li>
+                        <li class="float-left"><a href="">催泪</a></li>
+                        <li class="float-left"><a href="">美食</a></li>
+                        <li class="float-left"><a href="">偶像</a></li>
+                        <li class="float-left"><a href="">乙女</a></li>
+                        <li class="float-left"><a href="">职场</a></li>
+                    </ul></td>
+                </tr>
+                <tr>
+                    <th class="align-top">排&#12288;序：</th>
+                    <td><ul class="list-unstyled orders">
+                        <li class="float-left"><a href="">评分</a></li>
+                        <li class="float-left"><a href="">上映时间</a></li>
+                    </ul></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div th:replace="~{commoms::list-items}"></div>
+    <hr>
+    <div th:replace="~{commoms::index-page}"></div>
+</div>
+<hr class="m-0">
+<footer th:replace="~{commoms::footer}"></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/myjs.js"></script>
+
+</body>
+</html>

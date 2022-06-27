@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>开发日志</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/iconfont.js"></script>
+</head>
+<body>
+<header th:replace="~{commoms::header}"></header>
+<section class="container p-3" style="min-height: 600px">
+    <div class="row">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col" width="58">版本</th>
+                <th scope="col">功能介绍</th>
+                <th scope="col">完成时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="table-primary">
+                <td scope="row"> v1.0 </td>
+                <td> 使用springboot整合mysql、mybatis、thymeleaf、log4j、security、redis、mail，并制作网页、创建数据库，最终制作出拥有邮件验证登录系统的视频网站（只提供播放链接）。</td>
+                <td> 2022/01/18</td>
+            </tr>
+            <tr class="table-info">
+                <td scope="row"> v1.1 </td>
+                <td> 调整网页在大小屏的显示效果，纠正测试发现的错误，打包并上传到服务器。</td>
+                <td> 2022/01/21</td>
+            </tr>
+            <tr class="table-primary">
+                <td scope="row"> v1.2 </td>
+                <td> 完成域名ICP备案，配置域名解析，调整web端口。</td>
+                <td> 2022/01/26</td>
+            </tr>
+            <tr class="table-info">
+                <td scope="row"> v1.3 </td>
+                <td> 使用nginx部署，并完成https证书申请及配置</td>
+                <td> 2022/02/16</td>
+            </tr>
+            <tr class="table-primary">
+                <td scope="row"> v1.4 </td>
+                <td> 完成公安备案，并按要求在网页添加备案信息。</td>
+                <td> 2022/02/20</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<hr class="m-0">
+<footer th:replace="~{commoms::footer}"></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/myjs.js"></script>
+
+</body>
+</html>

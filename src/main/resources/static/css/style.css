@@ -1,0 +1,243 @@
+@charset "utf-8";
+/*通用格式*/
+body{
+	background: #f2f2f2;
+	min-width: 395px;
+}
+.container{
+	background: #FFFFFF;
+}
+a{
+	color: #000000;
+	text-decoration: none;
+}
+.card a:hover{
+	color: #000000;
+	text-decoration: none;
+}
+.bg-ra{
+	background: #FFFFFF;
+	padding: 10px;
+	margin: 8px;
+	border-radius: 12px;
+	height: auto;
+}
+.mc-title{
+	font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+/*----------header--------*/
+.top_bar {
+	width: 100%;
+	border-bottom: 1px solid #e2ebef;
+	background: #FFFFFF;
+}
+/**************搜索**************/
+.search_form form{
+	position: relative;
+	max-width: 540px;
+	margin: 0 auto;
+}
+.search_form form input{
+	width: 100%;
+	border-radius: 30px;
+	color: #6e6f70;
+	font-size: 16px;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 15px;
+	background-color: #e2ebef;
+	border:0;
+	outline: none;
+}
+.search_form form button{
+	position: absolute;
+	top: 10%;
+	right: 15px;
+	border-radius: 20px;
+	border: 0;
+	background-color: inherit;
+	outline: none;
+}
+/**************用户**************/
+.user_log img{
+	width: 38px;
+	border-radius: 19px;
+}
+.dropdown-item{
+	padding: 4px 18px;
+}
+/*阿里图标*/
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+/*排行榜*/
+.number {
+  font: 12px;
+  background: #F4F3F3;
+  padding: 2px 5px;
+}
+.num-top {
+  background: #09bb07;
+}
+.text-color {
+  color: #09bb07;
+}
+/*鼠标悬浮时图片放大*/
+.img_scale {
+  overflow: hidden;
+}
+.img_scale img {
+  transition: 0.5s;
+}
+.img_scale img:hover {
+  transform: scale(1.2);
+}
+/*评分*/
+.img_scale span{
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: #FFFFFF;
+	padding: 0 6px;
+	z-index:auto;
+	background: #09bb07;
+}
+/*收藏*/
+.store{
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin: 5px;
+	z-index:auto;
+}
+.store svg{
+	font-size: xx-large;
+}
+/*list页面，分类*/
+.sort_area li {
+	margin:0 6px; 
+}
+.sort_area th{
+	min-width: 67px;
+}
+.sort_area a{
+	font-size: 14px;
+}
+.selected{
+	background: #87ceeb;
+	color: #fff;
+}
+/*登录注册页面*/
+.form_popup{
+	margin: 80px auto;
+	max-width: 500px;
+}
+.user-account{
+	max-width: 370px;
+	padding: 15px 0 0 0;
+	margin: 40px auto 7px;
+	border-bottom: 1px solid #e2ebef;
+}
+.input-sec{
+	margin-bottom: 20px;
+}
+.input-sec label{
+	margin: 0 15px;
+	height: 24px;
+}
+.input-sec input{
+	width: 100%;
+	border-radius: 20px;
+	color: #6e6f70;
+	font-size: 16px;
+	height: 38px;
+	line-height: 38px;
+	padding: 0 15px;
+	background-color: #e2ebef;
+	border:0;
+	outline: none;
+}
+.checkbox-lg{
+	margin-bottom: 28px;
+}
+input[type="checkbox"] {
+	width: 19px;
+	height: 19px;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 18px;
+	margin-right: 10px;
+	position: relative;
+}
+
+input[type="checkbox"]::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	border-radius: 6px;
+	background-color: #e2ebef;
+	border:0;
+	outline: none;
+}
+
+input[type="checkbox"]:checked::before {
+	content: "";
+	background-color: #000;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	border: 0px;
+	border-radius:6px;
+	outline: none;
+}
+.input-sec button{
+	height: 38px;
+	border-radius: 5px;
+	margin-bottom: 18px;
+	padding: 0;
+	width: 100%;
+	color: #fff;
+	font-size: 16px;
+	background-color: #272626;
+	font-weight: 500;
+}
+.fg_btn{
+	color: #6e6f70;
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+.fr-ps{
+	width: 100%;
+	padding: 36px 0 100px;
+	text-align: center;
+}
+.fr-ps h1{
+	color: #6e6f70;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 20px;
+}
+.getcode input {
+	width: 150px;
+}
+.getcode button {
+	width: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 12px;
+	background-color:#CBC5C5;
+	border: 0;
+	color: #000;
+}

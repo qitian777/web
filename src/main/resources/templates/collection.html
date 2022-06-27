@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>幻影在线-收藏</title>
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="/js/iconfont.js"></script>
+</head>
+<body>
+<header th:replace="~{commoms::header}"></header>
+<div class="container py-3">
+    <div class="row">
+        <div class="col-12">
+            <table class="sort_area">
+                <tr>
+                    <th class="align-top">类　型：</th>
+                    <td><ul class="list-unstyled coll-type">
+                        <li class="float-left"><a href="">电影</a></li>
+                        <li class="float-left"><a href="">电视剧</a></li>
+                        <li class="float-left"><a href="">动漫</a></li>
+                    </ul></td>
+                </tr>
+                <tr>
+                    <th class="align-top">排&#12288;序：</th>
+                    <td><ul class="list-unstyled orders">
+                        <li class="float-left"><a href="">上映时间</a></li>
+                        <li class="float-left"><a href="">更新时间</a></li>
+                    </ul></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <hr>
+    <div th:replace="~{commoms::list-items}"></div>
+    <hr>
+    <div th:replace="~{commoms::index-page}"></div>
+</div>
+<hr class="m-0">
+<footer th:replace="~{commoms::footer}"></footer>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/js/bootstrap.bundle.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/myjs.js"></script>
+
+</body>
+</html>
